@@ -23,7 +23,7 @@ def recommend(event, context):
     )
 
     smResponseBody = json.loads(smResponse['Body'].read())
-    encodedMysfit = smResponseBody['predictions'][0]['predicted_label']
+    encodedTisit = smResponseBody['predictions'][0]['predicted_label']
 
     # NOTE: In a real-world scenario if you used a machine learning algorithm
     # that requires numeric values like kNN does, you would not hard-code the
@@ -37,33 +37,33 @@ def recommend(event, context):
 
     decodedTisitID = ''
 
-    if encodedMysfit == 0:
+    if encodedTisit == 0:
         decodedTisitID = '4e53920c-505a-4a90-a694-b9300791f0ae'
-    elif encodedMysfit == 1:
+    elif encodedTisit == 1:
         decodedTisitID = '2b473002-36f8-4b87-954e-9a377e0ccbec'
-    elif encodedMysfit == 2:
+    elif encodedTisit == 2:
         decodedTisitID = '0e37d916-f960-4772-a25a-01b762b5c1bd'
-    elif encodedMysfit == 3:
+    elif encodedTisit == 3:
         decodedTisitID = 'da5303ae-5aba-495c-b5d6-eb5c4a66b941'
-    elif encodedMysfit == 4:
+    elif encodedTisit == 4:
         decodedTisitID = 'a901bb08-1985-42f5-bb77-27439ac14300'
-    elif encodedMysfit == 5:
+    elif encodedTisit == 5:
         decodedTisitID = 'b41ff031-141e-4a8d-bb56-158a22bea0b3'
-    elif encodedMysfit == 6:
+    elif encodedTisit == 6:
         decodedTisitID = '3f0f196c-4a7b-43af-9e29-6522a715342d'
-    elif encodedMysfit == 7:
+    elif encodedTisit == 7:
         decodedTisitID = 'a68db521-c031-44c7-b5ef-bfa4c0850e2a'
-    elif encodedMysfit == 8:
+    elif encodedTisit == 8:
         decodedTisitID = 'c0684344-1eb7-40e7-b334-06d25ac9268c'
-    elif encodedMysfit == 9:
+    elif encodedTisit == 9:
         decodedTisitID = 'ac3e95f3-eb40-4e4e-a605-9fdd0224877c'
-    elif encodedMysfit == 10:
+    elif encodedTisit == 10:
         decodedTisitID = '33e1fbd4-2fd8-45fb-a42f-f92551694506'
-    elif encodedMysfit == 11:
+    elif encodedTisit == 11:
         decodedTisitID = 'b6d16e02-6aeb-413c-b457-321151bb403d'
 
     responseBody = {
-        "recommendedMysfit": decodedTisitID
+        "recommendedTisit": decodedTisitID
     }
 
 

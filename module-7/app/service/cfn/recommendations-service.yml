@@ -1,8 +1,8 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 
-Description: A stack that gives Mythical Mysfits the abillity to recommend
-             Mysfits to a website user using machine learning.
+Description: A stack that gives Tisits the abillity to recommend
+             Tisits to a website user using machine learning.
 
 Globals:
   Function:
@@ -15,16 +15,16 @@ Globals:
       AllowOrigin: "'*'"
 
 Resources:
-  MysfitsRecommendationsApi:
+  TisitsRecommendationsApi:
     Type: AWS::Serverless::Api
     Properties:
       StageName: prod
 
   # An IAM policy that permits Lambda funciton to invoke a SageMaker endpoint.
-  MysfitsRecommendationFunctionPolicy:
+  TisitsRecommendationFunctionPolicy:
     Type: 'AWS::IAM::ManagedPolicy'
     Properties:
-      ManagedPolicyName: MythicalMysfitsRecommendationPolicy
+      ManagedPolicyName: TisitsRecommendationPolicy
       PolicyDocument:
         Version: 2012-10-17
         Statement:
@@ -33,9 +33,9 @@ Resources:
                 - 'sagemaker:InvokeEndpoint'
             Resource: '*'
 
-  MysfitsRecommendationFunction:
+  TisitsRecommendationFunction:
     DependsOn:
-      - MysfitsRecommendationFunctionPolicy
+      - TisitsRecommendationFunctionPolicy
     Type: 'AWS::Serverless::Function'
     Properties:
       Handler: recommendations.recommend
@@ -44,16 +44,16 @@ Resources:
         A microservice backend to invoke a SageMaker endpoint.
       Timeout: 30
       Policies:
-        - !Ref MysfitsRecommendationFunctionPolicy
+        - !Ref TisitsRecommendationFunctionPolicy
       Events:
         RecommendationsApi:
           Type: Api
           Properties:
-            RestApiId: !Ref MysfitsRecommendationsApi
+            RestApiId: !Ref TisitsRecommendationsApi
             Path: /recommendations
             Method: POST
 
 Outputs:
-  MysfitsRecommendationsApi:
+  TisitsRecommendationsApi:
     Description: The endpoint for the REST API created with API Gateway
-    Value: !Join ['', ['https://', !Ref 'MysfitsRecommendationsApi',  '.execute-api.', !Ref 'AWS::Region', '.amazonaws.com/prod']]
+    Value: !Join ['', ['https://', !Ref 'TisitsRecommendationsApi',  '.execute-api.', !Ref 'AWS::Region', '.amazonaws.com/prod']]
